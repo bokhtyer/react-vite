@@ -1,0 +1,86 @@
+.table {
+    background-color: var(--white-bg);
+    margin-bottom: 0;
+
+    th {
+        white-space: nowrap;
+        padding: 8px 16px;
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 16px;
+        vertical-align: middle;
+    }
+    tbody {
+        td {
+            white-space: normal;
+            padding: 8px 16px;
+            color: var(--text-color);
+            font-weight: 400;
+            font-size: 15px;
+            vertical-align: middle;
+
+            &:first-child {
+                white-space: normal;
+            }
+        }
+        tr {
+            &:nth-of-type(odd) {
+                td {
+                    background-color: #f1f3f6;
+                }
+            }
+        }
+    }
+
+    .f-w-bold {
+        font-weight: 600 !important;
+    }
+
+    .f-s-16 {
+        font-size: 16px !important;
+    }
+
+    .t-center {
+        text-align: center !important;
+    }
+
+    .c_table_header {
+        background-color: var(--white-bg);
+        border: 1px solid var(--border-color);
+    }
+
+    .bg_transparent {
+        background-color: #ddd;
+    }
+
+    .c_row_hover {
+        border: 1px solid var(--border-color);
+    }
+
+    .c_row_hover:hover {
+        background-color: #797979;
+    }
+}
+
+.fs_15px {
+    font-size: 15px;
+}
+
+table.BillStatusReportTable {
+    thead {
+        tr {
+            th {
+                border-right: 2px solid #e8ebf2;
+                border-top: 2px solid #e8ebf2;
+                text-align: center;
+            }
+        }
+    }
+    tbody {
+        tr {
+            td {
+                text-align: center;
+            }
+        }
+    }
+}

@@ -1,212 +1,191 @@
 "use client";
-import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
+
 import classnames from "classnames";
-import React, { useEffect, useState } from "react";
+import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect, useState, useCallback } from "react";
 import { usePagination } from "./logic";
 import "./styles.scss";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-// Define prop types
 interface CustomPaginationProps {
-    onPageChange: (page: number, pageObj?: Record<string, string | number | boolean>) => void;
+    onPageChange: (page: number, pageObj?: Record<string, any>) => void;
     totalPage: number;
     currentPage: number;
     setCurrentPage: (page: number) => void;
-    queryList?: Array<Record<string, string | number | boolean>>;
+    queryList?: Array<Record<string, any>>;
     dynamo?: boolean;
-    queryDynamo?: Record<string, string | number | boolean>;
     hidePaginationMenu?: boolean;
     className?: string;
 }
 
-const CustomPagination: React.FC<CustomPaginationProps> = (props) => {
-    const {
-        onPageChange,
-        totalPage: totalCount,
-        currentPage,
-        setCurrentPage,
-        queryList,
-        dynamo,
-        hidePaginationMenu,
-    } = props;
-
+const CustomPagination: React.FC<CustomPaginationProps> = ({
+    onPageChange,
+    totalPage,
+    currentPage,
+    setCurrentPage,
+    queryList,
+    dynamo,
+    hidePaginationMenu,
+    className,
+}) => {
     const pageSize = 1;
     const paginationRange = usePagination({
         currentPage,
-        totalCount,
+        totalCount: totalPage,
         siblingCount: 1,
         pageSize,
     });
 
-    const [query] = useSearchParams();
-    const router = useNavigate();
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const location = useLocation();
-    const pathname = location.pathname;
-
-    const [page, setPage] = useState<number | Record<string, string | number | object | null>>({});
+    const [page, setPage] = useState<number | Record<string, any>>(currentPage);
     const DOTS = "DOTS";
 
-    useEffect(() => {
-        if (totalCount > 0) {
-            if (totalCount < currentPage) {
-                setQueryParams(`?page=${totalCount}`);
-                setPage(totalCount);
-                setCurrentPage(totalCount);
-            }
-        }
-    }, [totalCount]);
-    // console.log(totalCount, "totalCount", currentPage, "currentPage");
-    const onNext = () => {
-        if (!dynamo) {
-            setPage(currentPage + 1);
-            setQueryParams(`?page=${currentPage + 1}`);
-        } else {
-            dynamoQuerySetter(currentPage + 1);
-        }
-        setCurrentPage(currentPage + 1);
-    };
+    const keysToExclude = ["page", "pid", "lepk", "lesk", "legsipk", "legsisk"];
 
-    const onPrevious = () => {
-        if (!dynamo) {
-            setPage(currentPage - 1);
-            setQueryParams(`?page=${currentPage - 1}`);
-        } else {
-            dynamoQuerySetter(currentPage - 1);
-        }
-        setQueryParams(`?page=${currentPage - 1}`);
-        setCurrentPage(currentPage - 1);
-    };
+    // Function to update query parameters in the URL
+    const setQueryParams = useCallback(
+        (queryString: string) => {
+            const currentUrlParams = new URLSearchParams(searchParams);
 
-    const keys = ["page", "pid", "lepk", "lesk", "legsipk", "legsisk"];
-
-    const setQueryParams = (queryString: string) => {
-        const currentUrlParams = new URLSearchParams(query); // `query` is from `useSearchParams()`
-
-        currentUrlParams.forEach((value, key) => {
-            // Only append keys not in the predefined list
-            if (!keys.includes(key)) {
-                queryString = `${queryString}&${key}=${value}`;
-            }
-        });
-
-        // Create a query object for `router.push`
-        const queryObj: Record<string, string> = {};
-        queryString
-            .slice(1) // Remove the initial "?" from the query string
-            .split("&")
-            .forEach((param) => {
-                const [key, value] = param.split("=");
-                queryObj[key] = value;
+            currentUrlParams.forEach((value, key) => {
+                if (!keysToExclude.includes(key)) {
+                    queryString = `${queryString}&${key}=${value}`;
+                }
             });
 
-        router({
-            pathname: `${pathname}?${new URLSearchParams(queryObj).toString()}`,
-        });
+            navigate({
+                pathname: location.pathname,
+                search: `?${new URLSearchParams(queryString).toString()}`,
+            });
+        },
+        [searchParams, navigate, location.pathname]
+    );
+
+    // Handle next page
+    const onNext = () => {
+        if (currentPage < totalPage) {
+            setCurrentPage(currentPage + 1);
+            setPage(currentPage + 1);
+            if (!dynamo) setQueryParams(`?page=${currentPage + 1}`);
+            else dynamoQuerySetter(currentPage + 1);
+        }
     };
 
-    const lastPage = paginationRange[paginationRange.length - 1];
+    // Handle previous page
+    const onPrevious = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+            setPage(currentPage - 1);
+            if (!dynamo) setQueryParams(`?page=${currentPage - 1}`);
+            else dynamoQuerySetter(currentPage - 1);
+        }
+    };
 
+    // Update the page when totalPage changes
     useEffect(() => {
-        const currentUrlParams = new URLSearchParams(query);
-        setPage(Number(currentUrlParams.get("page")));
-    }, [query]);
+        if (totalPage > 0 && totalPage < currentPage) {
+            setCurrentPage(totalPage);
+            setPage(totalPage);
+            setQueryParams(`?page=${totalPage}`);
+        }
+    }, [totalPage, currentPage, setCurrentPage, setQueryParams]);
 
+    // Read page from query parameters
+    useEffect(() => {
+        const currentUrlParams = new URLSearchParams(searchParams);
+        if (!dynamo) {
+            setPage(Number(currentUrlParams.get("page")) || 1);
+        } else {
+            setPage({
+                lepk: currentUrlParams.get("lepk"),
+                lesk: currentUrlParams.get("lesk"),
+                legsipk: currentUrlParams.get("legsipk"),
+                legsisk: currentUrlParams.get("legsisk"),
+                pid: currentUrlParams.get("pid"),
+            });
+        }
+    }, [searchParams, dynamo]);
+
+    // Update state based on page
     useEffect(() => {
         if (!dynamo) {
-            if (isNaN(page as number)) return;
-            if (!page || (page as number) <= 0) {
+            if (typeof page !== "number" || page <= 0 || isNaN(page)) {
                 setCurrentPage(1);
-                setQueryParams(`?page=1`);
+                setQueryParams("?page=1");
                 onPageChange(1);
-                return;
+            } else {
+                setCurrentPage(page);
+                onPageChange(page);
             }
-            setCurrentPage(page as number);
-            onPageChange(page as number);
         } else {
             if (Object.keys(page).length === 0) return;
-            if ((page as Record<string, string | number | null>)?.pid) {
+            if ((page as Record<string, any>)?.pid) {
                 const validPage =
-                    Number((page as Record<string, string | number | null>)?.pid) <= totalCount
-                        ? Number((page as Record<string, string | number | null>)?.pid)
-                        : 1;
-                onPageChange(
-                    validPage,
-                    Object.fromEntries(Object.entries(page).filter(([_, v]) => v !== null)) as Record<
-                        string,
-                        string | number | boolean
-                    >
-                );
+                    Number((page as Record<string, any>)?.pid) <= totalPage ? (page as Record<string, any>).pid : 1;
+                onPageChange(validPage, page as Record<string, any>);
                 setCurrentPage(validPage);
-                return;
+            } else {
+                dynamoQuerySetter(1);
+                onPageChange(1);
+                setCurrentPage(1);
             }
-            dynamoQuerySetter(1);
-            onPageChange(1);
-            setCurrentPage(1);
         }
-    }, [page]);
+    }, [page, dynamo, onPageChange, setCurrentPage, setQueryParams, totalPage]);
 
+    // Function to set query parameters dynamically for Dynamo pagination
     const dynamoQuerySetter = (page: number) => {
-        const queryParams = queryList ? queryList[page] : {};
-        setQueryParams(
-            `?lepk=${queryParams.lepk}&lesk=${queryParams.lesk}&legsipk=${queryParams.legsipk}&pid=${page}&legsisk=${queryParams.legsisk}`
-        );
+        if (queryList) {
+            const queryParams = queryList[page] || {};
+            setQueryParams(
+                `?lepk=${queryParams.lepk}&lesk=${queryParams.lesk}&legsipk=${queryParams.legsipk}&pid=${page}&legsisk=${queryParams.legsisk}`
+            );
+        }
     };
 
-    if (currentPage === 0 || totalCount < 1) {
-        return;
-    }
+    if (currentPage === 0 || totalPage < 1) return null;
 
     return (
         <div className="pagination-component">
             {paginationRange.length > 1 && (
                 <div className={`pagination-component-wrapper ${hidePaginationMenu ? "hidePaginationMenu" : ""}`}>
-                    <ul className={classnames("pagination-container", props.className)}>
+                    <ul className={classnames("pagination-container", className)}>
                         {/* Left navigation arrow */}
                         <li
-                            className={classnames("pagination-item", {
-                                disabled: currentPage === 1,
-                            })}
+                            className={classnames("pagination-item", { disabled: currentPage === 1 })}
                             onClick={onPrevious}
                         >
-                            {/* <MaterialSymbol icon={"chevron_left"} /> */}
-                            {"<<"}
+                            <span>
+                                <FiChevronLeft />
+                            </span>
                         </li>
 
-                        {paginationRange.map((pageNumber, index) => {
-                            if (pageNumber === DOTS) {
-                                return (
-                                    <li className="pagination-item dots" key={index}>
-                                        &#8230;
-                                    </li>
-                                );
-                            }
-
-                            return (
-                                <li
-                                    className={classnames("pagination-item", {
-                                        selected: pageNumber === currentPage,
-                                    })}
-                                    onClick={() => {
+                        {paginationRange.map((pageNumber, index) => (
+                            <li
+                                key={index}
+                                className={classnames("pagination-item", { selected: pageNumber === currentPage })}
+                                onClick={() => {
+                                    if (pageNumber !== DOTS) {
+                                        setCurrentPage(Number(pageNumber));
+                                        setPage(Number(pageNumber));
                                         if (!dynamo) setQueryParams(`?page=${pageNumber}`);
                                         else dynamoQuerySetter(pageNumber as number);
-                                        if (!dynamo) setPage(Number(pageNumber));
-                                        setCurrentPage(pageNumber as number);
-                                    }}
-                                    key={index}
-                                >
-                                    {pageNumber}
-                                </li>
-                            );
-                        })}
+                                    }
+                                }}
+                            >
+                                {pageNumber === DOTS ? "…" : pageNumber}
+                            </li>
+                        ))}
 
                         {/* Right navigation arrow */}
                         <li
-                            className={classnames("pagination-item", {
-                                disabled: currentPage === lastPage,
-                            })}
+                            className={classnames("pagination-item", { disabled: currentPage === totalPage })}
                             onClick={onNext}
                         >
-                            {/* <MaterialSymbol icon={"chevron_right"} /> */}
-                            {">>"}
+                            <span>
+                                <FiChevronRight />
+                            </span>
                         </li>
                     </ul>
                 </div>

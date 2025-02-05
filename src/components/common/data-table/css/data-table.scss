@@ -1,0 +1,20 @@
+.data-table {
+    .card {
+        background: var(--white-bg);
+        box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.055);
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 24px;
+
+        .card-header {
+            background: var(--white-bg);
+            padding: 0px;
+            border-bottom: 0;
+            margin-bottom: 16px;
+
+            h5 {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
