@@ -1,10 +1,9 @@
 .data-table {
     .card {
-        background: var(--white-bg);
-        box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.055);
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        padding: 24px;
+        background: #fff;
+        padding: 18px 15px;
+        border-radius: 0px;
+        border: none;
 
         .card-header {
             background: var(--white-bg);
@@ -14,6 +13,21 @@
 
             h5 {
                 margin-bottom: 0;
+                font-size: 24px;
+                font-weight: 500;
+            }
+            .custom-button {
+                padding: 10px 16px;
+                font-size: 14px;
+                font-weight: 500;
+                border: none;
+                border-radius: 4px;
+                line-height: 18px;
+                border: 1px solid var(--primary-color);
+                &:hover {
+                    background: var(--white-color);
+                    color: var(--primary-color);
+                }
             }
         }
     }

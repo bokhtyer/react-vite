@@ -14,11 +14,11 @@ export default function DataTable(props: any) {
                                     <>{props?.customHeader}</>
                                 ) : (
                                     <div className="row">
-                                        <div className="col-sm-4">
+                                        <div className="col-sm-6 align-self-center">
                                             <h5 className={"text-capitalize"}>{props?.title}</h5>
                                         </div>
                                         {props?.addButtonText && (
-                                            <div className="col-sm-8">
+                                            <div className="col-sm-6">
                                                 <div className="text-end">
                                                     <Button
                                                         btnText={props?.addButtonText} // Button text
