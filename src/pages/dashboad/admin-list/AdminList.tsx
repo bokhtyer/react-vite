@@ -2,6 +2,8 @@ import { useTranslation } from "react-i18next";
 import DataTable from "../../../components/common/data-table/Pages";
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
+import { RiDeleteBin3Line, RiEdit2Fill } from "react-icons/ri";
+import Tooltip from "../../../components/common/Tooltip/Tooltip";
 
 const AdminList = () => {
     const { t } = useTranslation();
@@ -9,7 +11,7 @@ const AdminList = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const totalCount = 12;
     const [currentPage, setCurrentPage] = useState(1);
-
+    console.log(modalOpen);
     const customerList = [
         {
             id: 1,
@@ -69,6 +71,24 @@ const AdminList = () => {
 
     const tableHeadings = ["Name", "Email", "Phone", "Action"];
 
+    const handleAction = (id: number) => {
+        console.log("Edit", id);
+        return (
+            <div className="action-buttons">
+                <Tooltip content="Edit User">
+                    <button className="btn btn-primary">
+                        <RiEdit2Fill />
+                    </button>
+                </Tooltip>
+                <Tooltip content="Remove User">
+                    <button className="btn btn-danger">
+                        <RiDeleteBin3Line />
+                    </button>
+                </Tooltip>
+            </div>
+        );
+    };
+
     /*
      * Function to generate table rows for the customer list
      * This function iterates over the `customerList` array,
@@ -84,6 +104,7 @@ const AdminList = () => {
             rowData.data.push(item?.full_name || "N/A");
             rowData.data.push(item?.email || "N/A");
             rowData.data.push(item?.phone || "N/A");
+            rowData.data.push(handleAction(item?.id));
 
             // Add the complete row (with all columns) to the list of table rows
             tableListsRows.push(rowData);
