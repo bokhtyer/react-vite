@@ -22,7 +22,7 @@ interface InputPhoneFieldProps {
     onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
     onFocus?: () => void;
     countryCodeEditable?: boolean;
-    onchangeCallback?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onchangeCallback?: (value: string) => void;
     requiredMessage?: string | boolean;
     requiredMessageLabel?: string;
     whiteSpace?: boolean;
@@ -72,7 +72,7 @@ const InputPhoneField: React.FC<InputPhoneFieldProps> = (props) => {
                         onBlur={props.onBlur}
                         onFocus={props.onFocus}
                         countryCodeEditable={props.countryCodeEditable}
-                        onChange={(value, data, event) => props.onchangeCallback && props.onchangeCallback(event)}
+                        onChange={(event) => props.onchangeCallback && props.onchangeCallback(event)}
                         // error={true}
                     />
                     {props.requiredMessage ? (
