@@ -4,6 +4,7 @@ import { FaBars, FaCog, FaSignOutAlt, FaUser, FaChevronDown } from "react-icons/
 import "./Header.scss";
 import { Link } from "react-router-dom";
 import path from "../../../routes/path";
+import siteConfig from "../../../config/site-config";
 
 interface HeaderProps {
     onToggleSidebar: () => void;
@@ -22,11 +23,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
                 <div className="row align-items-center justify-content-between">
                     <div className="col-auto d-flex align-items-center">
                         <div className="logo ms-2">
-                            <img
-                                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-8QBdz0nBHXAoc5ua8dESzaPxRplUOW.png"
-                                alt="Logo"
-                                height="32"
-                            />
+                            <img src={siteConfig.white_logo} alt={siteConfig.company_name} height="32" />
                         </div>
                         <button className="btn btn-link sidebar-toggle p-2" onClick={onToggleSidebar}>
                             <FaBars size={20} />
@@ -40,21 +37,13 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
                                     className={`user-profile-btn ${isProfileOpen ? "active" : ""}`}
                                     onClick={toggleProfile}
                                 >
-                                    <img
-                                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-8QBdz0nBHXAoc5ua8dESzaPxRplUOW.png"
-                                        alt="User"
-                                        className="avatar"
-                                    />
+                                    <img src={siteConfig.avatar} alt="User" className="avatar" />
                                     <FaChevronDown size={12} className="dropdown-icon" />
                                 </button>
                                 {isProfileOpen && (
                                     <div className="profile-dropdown">
                                         <div className="dropdown-header">
-                                            <img
-                                                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-8QBdz0nBHXAoc5ua8dESzaPxRplUOW.png"
-                                                alt="User"
-                                                className="avatar"
-                                            />
+                                            <img src={siteConfig.avatar} alt="User" className="avatar" />
                                             <div className="user-info">
                                                 <span className="name">Json Taylor</span>
                                                 <span className="email">json.taylor@example.com</span>
