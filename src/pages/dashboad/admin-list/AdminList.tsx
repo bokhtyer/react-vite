@@ -1,22 +1,10 @@
-import React from "react";
+import { useTranslation } from "react-i18next";
 
-const AdminList: React.FC = () => {
-    const admins = [
-        { id: 1, name: "Admin One", email: "admin1@example.com" },
-        { id: 2, name: "Admin Two", email: "admin2@example.com" },
-        { id: 3, name: "Admin Three", email: "admin3@example.com" },
-    ];
-
+const AdminList = () => {
+    const { t } = useTranslation();
     return (
         <div>
-            <h1>Admin List</h1>
-            <ul>
-                {admins.map((admin) => (
-                    <li key={admin.id}>
-                        {admin.name} - {admin.email}
-                    </li>
-                ))}
-            </ul>
+            <h1>{t("adminList")}</h1>
         </div>
     );
 };
