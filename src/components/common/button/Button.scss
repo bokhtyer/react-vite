@@ -1,0 +1,97 @@
+@mixin button-variant($bg-color, $text-color) {
+    background-color: $bg-color;
+    color: $text-color;
+
+    &:hover:not(:disabled) {
+        background-color: var(--primary-color);
+    }
+}
+
+.custom-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 30px;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    &:disabled {
+        opacity: 0.6;
+    }
+
+    .button-text {
+        margin-left: 0.5rem;
+    }
+
+    &.loading {
+        cursor: no-drop;
+        .button-text {
+            opacity: 0.2;
+        }
+    }
+
+    // Variants
+    &.button-1 {
+        @include button-variant(var(--primary-color), #ffffff);
+    }
+
+    &.button-2 {
+        @include button-variant(var(--primary-color-light), #ffffff);
+    }
+
+    &.btn-success {
+        @include button-variant(#2ecc71, #ffffff);
+    }
+
+    &.btn-danger {
+        @include button-variant(#e74c3c, #ffffff);
+    }
+
+    &.btn-info {
+        @include button-variant(#3498db, #ffffff);
+    }
+
+    &.btn-cancel {
+        @include button-variant(#95a5a6, #ffffff);
+    }
+
+    // Sizes
+    &.btn-small {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    &.btn-large {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.25rem;
+    }
+
+    // Loading spinner
+    .spinner {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        border: 2px solid currentColor;
+        border-top-color: transparent;
+        animation: spin 0.6s linear infinite;
+        position: absolute;
+        top: calc(50% - 0.5rem);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

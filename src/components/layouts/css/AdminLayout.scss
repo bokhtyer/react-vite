@@ -1,0 +1,86 @@
+// import inter fonts
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+:root {
+    // Main colors
+    --sidebar-bg: #1b1e3d;
+    --sidebar-text: #ffffff;
+    --header-bg: #ffffff;
+    --header-text: #1b1e3d;
+    --primary-color: #5960e2;
+
+    --body-color: #8c9097;
+    --section-bg: #f0f1f7;
+
+    // Additional colors
+    --border-color: #e5e7eb;
+    --icon-color: #64748b;
+    --hover-bg: rgba(255, 255, 255, 0.05);
+
+    // Spacing
+    --header-height: 64px;
+    --sidebar-width: 240px;
+    --sidebar-collapsed-width: 70px;
+
+    // Fonts
+    --headding-font: "Inter", sans-serif;
+}
+
+.admin-layout {
+    min-height: 100vh;
+    color: var(--body-color);
+    background-color: var(--section-bg);
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--headding-font);
+        color: #333335;
+    }
+    &.sidebar-collapsed {
+        .admin-sidebar {
+            width: var(--sidebar-collapsed-width);
+
+            .nav-text,
+            .nav-caret {
+                display: none;
+            }
+
+            .nav-children {
+                display: none;
+            }
+        }
+
+        // .main-content {
+        //     margin-left: var(--sidebar-collapsed-width);
+        // }
+    }
+}
+
+.main-content {
+    width: 100%;
+    padding: 20px;
+    transition: margin 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .admin-layout {
+        .admin-sidebar {
+            transform: translateX(-100%);
+            position: fixed;
+            z-index: 1040;
+            height: 100%;
+        }
+
+        &.sidebar-collapsed {
+            .admin-sidebar {
+                transform: translateX(0);
+            }
+        }
+
+        .main-content {
+            margin-left: 0;
+        }
+    }
+}

@@ -1,0 +1,48 @@
+.custom-checkbox-filed {
+    position: relative;
+    label {
+        position: relative;
+        padding-left: 30px;
+        min-width: 20px;
+        min-height: 20px;
+        &:after {
+            content: "";
+            clear: both;
+            display: block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #a8a8a8;
+            border-radius: 50%;
+            cursor: pointer;
+            left: 0px;
+            top: 2px;
+        }
+        &.disabled {
+            cursor: no-drop !important;
+
+            &:after {
+                opacity: 40%;
+                cursor: no-drop;
+            }
+        }
+    }
+    input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        opacity: 0;
+        &:checked + label {
+            &:after {
+                content: "\e5ca";
+                font-size: 17px;
+                line-height: 18px;
+                color: #fff;
+                border-color: var(--primary-color);
+                background: var(--primary-color);
+                text-align: center;
+                font-family: "Material Symbols Outlined";
+            }
+        }
+    }
+}

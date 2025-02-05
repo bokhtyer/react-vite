@@ -1,0 +1,2 @@
+https://spruko.com/demo/ynex/dist/html/index.html
+https://spruko.com/demo/django/xintra/dist/html/form-advanced.html

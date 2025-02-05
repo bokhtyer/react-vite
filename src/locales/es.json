@@ -1,0 +1,14 @@
+{
+    "welcome": "Bienvenido a nuestro sitio web",
+    "language": "Idioma",
+    "dashboard": "Tablero",
+    "adminManagement": "Gestión de Administradores",
+    "adminList": "Lista de Administradores",
+    "partnerManagement": "Gestión de Socios",
+    "partnerList": "Lista de Socios",
+    "otherPartners": "Lista de Otros Socios",
+    "partnerUser": "Usuario Socio",
+    "search": "Buscar",
+    "fullscreen": "Pantalla completa",
+    "signout": "Cerrar sesión"
+}

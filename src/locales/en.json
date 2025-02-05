@@ -1,0 +1,14 @@
+{
+    "welcome": "Welcome to our website",
+    "language": "Language",
+    "dashboard": "Dashboard",
+    "adminManagement": "Admin Management",
+    "adminList": "Admin List",
+    "partnerManagement": "Partner Management",
+    "partnerList": "Partner List",
+    "otherPartners": "Other Partners List",
+    "partnerUser": "Partner User",
+    "search": "Search",
+    "fullscreen": "Fullscreen",
+    "signout": "Sign Out"
+}

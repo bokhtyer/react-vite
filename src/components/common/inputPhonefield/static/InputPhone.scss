@@ -1,0 +1,110 @@
+.phone_block {
+    .single-input {
+        position: relative;
+
+        label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .name {
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--heading-color);
+                margin-bottom: 0;
+                line-height: 1;
+            }
+
+            .asterisk {
+                color: #eb5757;
+            }
+
+            .link {
+                a {
+                    line-height: 14px;
+                    text-decoration: none;
+                    transition: all ease-in-out 0.35s;
+                    color: #1f57c3;
+                    font-weight: 600;
+                    font-size: 14px;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: var(--primary-color);
+                    }
+                }
+            }
+        }
+        .react-tel-input {
+            .special-label {
+                display: none;
+            }
+        }
+
+        input {
+            width: 100%;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding-left: 46px;
+            height: 44px;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--heading-color);
+            transition: all 0.3s ease;
+
+            &.is-invalid {
+                border-color: #eb5757;
+
+                &:focus {
+                    border-color: #eb5757;
+                }
+            }
+
+            &::placeholder {
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 25px;
+                color: var(--text-color);
+            }
+
+            &:focus {
+                border-color: var(--text-color);
+                box-shadow: none;
+            }
+        }
+
+        .phn-error-message {
+            color: #eb5757;
+            font-size: 13px;
+            font-weight: normal;
+            text-align: left;
+            width: 100%;
+            display: block;
+        }
+    }
+}
+
+// .react-tel-input .form-control {
+//     height: 54px;
+//     width: 100%;
+//     margin: 10px 0 20px;
+//     background: #FFFFFF;
+//     border: 1px solid #E0E0E0;
+//     box-sizing: border-box;
+//     border-radius: 3px;
+//     padding: 0 0 0 45px;
+//     color: #4F4F4F;
+
+//     &:focus {
+//         outline: none !important;
+//         border: 1px solid #E0E0E0;
+//         box-shadow: none;
+//     }
+
+//     &.is-invalid {
+//         border: 1px solid #EB5757;
+//         border-radius: 3px;
+//         margin: 10px 0 25px
+//     }
+// }
