@@ -1,5 +1,6 @@
 import Button from "../button/Button";
 import CustomPagination from "../paginations/CustomPagination";
+import SpinnerLoader from "../spinner-loader/SpinnerLader";
 import BasicTable from "../table/page";
 import "./css/data-table.scss";
 export default function DataTable(props: any) {
@@ -34,8 +35,13 @@ export default function DataTable(props: any) {
                                     </div>
                                 )}
                             </div>
-                            <div className={`table-responsive ${props?.tableClassName ? props?.tableClassName : ""}`}>
+                            <div
+                                className={`table-responsive ${
+                                    props?.loading ? "table-position-relative-height" : ""
+                                }  ${props?.tableClassName ? props?.tableClassName : ""}`}
+                            >
                                 <BasicTable headers={props?.headers} data={props?.findData()} />
+                                {props?.loading && <SpinnerLoader />}
                             </div>
                             {props?.pagination && (
                                 <CustomPagination
