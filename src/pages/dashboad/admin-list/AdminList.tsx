@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import DataTable from "../../../components/common/data-table/Pages";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { RiDeleteBin3Line, RiEdit2Fill } from "react-icons/ri";
 import Tooltip from "../../../components/common/Tooltip/Tooltip";
@@ -12,6 +12,7 @@ const AdminList = () => {
     const { t } = useTranslation();
     const pageLimit = 10;
     const [modalOpen, setModalOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
     const totalCount = 12;
     const [currentPage, setCurrentPage] = useState(1);
     const customerList = [
@@ -116,9 +117,16 @@ const AdminList = () => {
         return tableListsRows;
     };
 
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    }, []);
+
     return (
         <div className="admin-list">
-            <CustomPageLoader pageLoader={false} />
+            <CustomPageLoader pageLoader={loading} />
             <Breadcrumb parent="Admin Management" title={t("adminList")} />
 
             <DataTable
