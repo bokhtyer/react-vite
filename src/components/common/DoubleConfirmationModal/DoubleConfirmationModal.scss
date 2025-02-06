@@ -1,0 +1,27 @@
+.double-confirmation {
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 0px 10px;
+
+    .modal-header {
+        border: 0;
+        display: none;
+    }
+
+    .modal-body {
+        text-align: center;
+        padding: 20px 30px;
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    .modal-footer {
+        border: 0;
+
+        button.button-1.primary {
+            background: #23d2e2 none repeat scroll 0 0;
+        }
+    }
+}

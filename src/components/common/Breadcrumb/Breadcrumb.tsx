@@ -2,15 +2,16 @@ import { Fragment } from "react";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import path from "../../../routes/path";
+import { IoHomeOutline } from "react-icons/io5";
 
 function Breadcrumb(props: any) {
     return (
         <Fragment>
             <div className="Breadcrumb">
                 <ul className="breadcrumb">
-                    <li className="breadcrumb-item">
-                        <Link to={path.dashboard}>
-                            <i className="fa-solid fa-house" />
+                    <li className="breadcrumb-item d-flex align-items-center">
+                        <Link className="home-i" to={path.dashboard}>
+                            <IoHomeOutline />
                         </Link>
                     </li>
                     {props.parentPath ? (

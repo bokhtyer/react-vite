@@ -4,6 +4,11 @@
             a {
                 color: var(--primary-color);
                 font-weight: 500;
+                &.home-i {
+                    color: var(--primary-color);
+                    font-size: 16px;
+                    display: flex;
+                }
             }
         }
     }
