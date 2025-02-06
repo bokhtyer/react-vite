@@ -149,7 +149,12 @@ const AdminList = () => {
                 onPageChange={() => console.log("Hello")}
                 loading={loading}
             />
-            <DoubleConfirmationModal open={modalOpen} close={() => setModalOpen(false)} />
+            <DoubleConfirmationModal
+                text={"Are you sure you went to remove this User"}
+                open={modalOpen}
+                close={() => setModalOpen(false)}
+                icon={<RiDeleteBin3Line />}
+            />
         </div>
     );
 };

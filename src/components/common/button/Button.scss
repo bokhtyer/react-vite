@@ -3,7 +3,7 @@
     color: $text-color;
 
     &:hover:not(:disabled) {
-        background-color: var(--primary-color);
+        background-color: $bg-color;
     }
 }
 
@@ -37,26 +37,44 @@
     // Variants
     &.button-1 {
         @include button-variant(var(--primary-color), #ffffff);
+        &:hover {
+            @include button-variant(var(--primary-color-dark), #ffffff);
+        }
     }
 
     &.button-2 {
         @include button-variant(var(--primary-color-light), #ffffff);
+        &:hover {
+            @include button-variant(var(--primary-color), #ffffff);
+        }
     }
 
     &.btn-success {
         @include button-variant(#2ecc71, #ffffff);
+        &:hover {
+            @include button-variant(#27ae60, #ffffff);
+        }
     }
 
     &.btn-danger {
         @include button-variant(#e74c3c, #ffffff);
+        &:hover {
+            @include button-variant(#c0392b, #ffffff);
+        }
     }
 
     &.btn-info {
         @include button-variant(#3498db, #ffffff);
+        &:hover {
+            @include button-variant(#2980b9, #ffffff);
+        }
     }
 
     &.btn-cancel {
         @include button-variant(#95a5a6, #ffffff);
+        &:hover {
+            @include button-variant(#808e8f, #ffffff);
+        }
     }
 
     // Sizes

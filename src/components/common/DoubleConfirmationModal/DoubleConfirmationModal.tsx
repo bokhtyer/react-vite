@@ -14,15 +14,25 @@ function DoubleConfirmationModal(props: any) {
                 class="double-confirmation"
             >
                 <div className="modal-body">
+                    {props.icon && (
+                        <div
+                            className="icon"
+                            style={{
+                                color: props.iconColor || "#FF0000",
+                            }}
+                        >
+                            {props.icon}
+                        </div>
+                    )}
                     <p>{props.text}</p>
                 </div>
                 <div className="modal-footer justify-content-center">
                     <Button
                         type="submit"
                         onClick={() => props.close(false)}
-                        btnClassName="muted"
                         btnText="Cancel"
                         disabled={props.loading}
+                        variant="btn-cancel"
                     />
                     <Button
                         type="submit"
