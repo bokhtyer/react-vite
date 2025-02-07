@@ -12,7 +12,7 @@ const AdminList = () => {
     const pageLimit = 10;
     const [modalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-    const totalCount = 12;
+    const totalCount = 80;
     const [currentPage, setCurrentPage] = useState(1);
     const customerList = [
         {
