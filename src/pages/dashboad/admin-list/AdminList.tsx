@@ -5,7 +5,6 @@ import { FaPlus } from "react-icons/fa";
 import { RiDeleteBin3Line, RiEdit2Fill } from "react-icons/ri";
 import Tooltip from "../../../components/common/Tooltip/Tooltip";
 import Breadcrumb from "../../../components/common/Breadcrumb/Breadcrumb";
-// import CustomPageLoader from "../../../components/common/customPageLoader/page";
 import DoubleConfirmationModal from "../../../components/common/DoubleConfirmationModal/DoubleConfirmationModal";
 
 const AdminList = () => {
@@ -84,7 +83,7 @@ const AdminList = () => {
                     </button>
                 </Tooltip>
                 <Tooltip content="Remove User">
-                    <button className="btn btn-danger">
+                    <button onClick={() => setModalOpen(true)} className="btn btn-danger">
                         <RiDeleteBin3Line />
                     </button>
                 </Tooltip>
@@ -126,7 +125,6 @@ const AdminList = () => {
 
     return (
         <div className="admin-list">
-            {/* <CustomPageLoader pageLoader={loading} /> */}
             <Breadcrumb parent="Admin Management" title={t("adminList")} />
 
             <DataTable
