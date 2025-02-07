@@ -1,12 +1,12 @@
 import type React from "react";
 import { useFormik } from "formik";
-import { useLogin } from "../utils/hook/auth";
-import { emailRegex } from "../helper/helper";
+import { useLogin } from "../../utils/hook/auth";
+import { emailRegex } from "../../helper/helper";
 import { toast } from "react-toastify";
-import InputField from "../components/common/InputField/page";
-import Button from "../components/common/button/Button";
-import siteConfig from "../config/site-config";
-import path from "../routes/path";
+import InputField from "../../components/common/InputField/page";
+import Button from "../../components/common/button/Button";
+import siteConfig from "../../config/site-config";
+import path from "../../routes/path";
 // import { useNavigate } from "react-router-dom";
 
 type LoginFormValues = {

@@ -1,5 +1,5 @@
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
 import UserProfile from "../pages/profile/UserProfile";
 import Dashboard from "../pages/dashboad/Dashboard";
 import Home from "../pages/Home";
