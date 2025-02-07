@@ -7,18 +7,13 @@ import InputField from "../../components/common/InputField/page";
 import Button from "../../components/common/button/Button";
 import siteConfig from "../../config/site-config";
 import path from "../../routes/path";
-// import { useNavigate } from "react-router-dom";
-
-type LoginFormValues = {
-    email: string;
-    password: string;
-};
+import { LoginFormType } from "../../helper/type";
 
 const Login: React.FC = () => {
     const { mutate: login, isLoading } = useLogin();
 
-    const validateLoginForm = (values: LoginFormValues) => {
-        const errors: Partial<LoginFormValues> = {};
+    const validateLoginForm = (values: LoginFormType) => {
+        const errors: Partial<LoginFormType> = {};
 
         if (!emailRegex.test(values.email.trim())) errors.email = "Invalid email address";
         if (!values.email.trim()) errors.email = "Email is required";
@@ -29,7 +24,7 @@ const Login: React.FC = () => {
     };
 
     // Submit function for client login form
-    const loginSubmitForm = (values: LoginFormValues) => {
+    const loginSubmitForm = (values: LoginFormType) => {
         // Payload for login
         const payload = {
             email: values.email.trim(),

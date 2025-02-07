@@ -5,3 +5,7 @@ export type MenuItem = {
     icon?: React.ReactNode;
     children?: MenuItem[];
 };
+export type LoginFormType = {
+    email: string;
+    password: string;
+};
