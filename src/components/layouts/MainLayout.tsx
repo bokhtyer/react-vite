@@ -1,14 +1,16 @@
 import { Outlet } from "react-router-dom";
+import "./css/MainLayout.scss";
 import Header from "../client/header/Header";
+import Footer from "../client/footer/Footer";
 
 const MainLayout = () => {
     return (
         <>
             <Header />
-            <main>
+            <main className="main-wrapper">
                 <Outlet /> {/* Renders child routes */}
             </main>
-            <footer>Your App Footer</footer>
+            <Footer />
         </>
     );
 };

@@ -1,12 +1,18 @@
 // Header.jsx
 import { useState } from "react";
-import { FaMapMarkerAlt, FaSearch, FaUser, FaShoppingCart, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import { FaMapMarkerAlt, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import "./Header.scss";
+import { Link, useNavigate } from "react-router-dom";
+import LanguageSwitcher from "../../common/LanguageSwitcher/LanguageSwitcher";
+import path from "../../../routes/path";
+import siteConfig from "../../../config/site-config";
+import Button from "../../common/button/Button";
 
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState(null);
+    const navigate = useNavigate();
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -61,9 +67,9 @@ const Header = () => {
                     <div className="row">
                         <div className="col-md-6">
                             <div className="top-bar-left">
-                                <a href="#" className="location-link">
-                                    <FaMapMarkerAlt /> Store Locator
-                                </a>
+                                <Link to="#" className="location-link">
+                                    <FaMapMarkerAlt /> Dhaka - 1000, Bangladesh
+                                </Link>
                                 <span className="divider">|</span>
                                 <a href="mailto:support@example.com" className="email-link">
                                     <MdEmail /> support@example.com
@@ -72,17 +78,7 @@ const Header = () => {
                         </div>
                         <div className="col-md-6">
                             <div className="top-bar-right">
-                                <span className="announcement">Open Door To A worlds Of Fashion | Discover Now</span>
-                                <div className="language-currency">
-                                    <select className="language-select">
-                                        <option value="en">English</option>
-                                        <option value="es">Español</option>
-                                    </select>
-                                    <select className="currency-select">
-                                        <option value="usd">USD</option>
-                                        <option value="eur">EUR</option>
-                                    </select>
-                                </div>
+                                <LanguageSwitcher />
                             </div>
                         </div>
                     </div>
@@ -92,35 +88,39 @@ const Header = () => {
             <header className="main-header">
                 <div className="container">
                     <div className="row align-items-center">
-                        <div className="col-md-2 col-6">
+                        <div className="col-lg-2 col-6">
                             <div className="header-left">
                                 <button className="mobile-menu-toggle d-lg-none" onClick={toggleMobileMenu}>
                                     <FaBars />
                                 </button>
                                 <div className="logo">
-                                    <a href="/">WEIBOO</a>
+                                    <Link to={path.home}>
+                                        <img src={siteConfig.logo} alt={siteConfig.company_name} />
+                                    </Link>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="col-md-8 d-none d-lg-block">
+                        <div className="col-lg-8 d-none d-lg-block">
                             <nav className="main-nav">
                                 <ul className="nav-list">
                                     <li className="nav-item has-submenu">
-                                        <a href="#">Home</a>
+                                        <Link to="#">
+                                            Home <FaChevronDown />
+                                        </Link>
                                         <div className="submenu">
                                             <div className="submenu-inner">
                                                 <div className="submenu-column">
                                                     <h4>Home Layouts</h4>
                                                     <ul>
                                                         <li>
-                                                            <a href="#">Home Default</a>
+                                                            <Link to="#">Home Default</Link>
                                                         </li>
                                                         <li>
-                                                            <a href="#">Home Modern</a>
+                                                            <Link to="#">Home Modern</Link>
                                                         </li>
                                                         <li>
-                                                            <a href="#">Home Classic</a>
+                                                            <Link to="#">Home Classic</Link>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -128,20 +128,22 @@ const Header = () => {
                                         </div>
                                     </li>
                                     <li className="nav-item has-submenu">
-                                        <a href="#">Shop</a>
+                                        <a href="#">
+                                            Shop <FaChevronDown />
+                                        </a>
                                         <div className="submenu">
                                             <div className="submenu-inner">
                                                 <div className="submenu-column">
                                                     <h4>Shop Pages</h4>
                                                     <ul>
                                                         <li>
-                                                            <a href="#">Product List</a>
+                                                            <Link to="#">Product List</Link>
                                                         </li>
                                                         <li>
-                                                            <a href="#">Product Grid</a>
+                                                            <Link to="#">Product Grid</Link>
                                                         </li>
                                                         <li>
-                                                            <a href="#">Categories</a>
+                                                            <Link to="#">Categories</Link>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -149,30 +151,21 @@ const Header = () => {
                                         </div>
                                     </li>
                                     <li className="nav-item">
-                                        <a href="#">Pages</a>
+                                        <Link to="#">Pages</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <a href="#">Blog</a>
+                                        <Link to="#">Blog</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <a href="#">Contact</a>
+                                        <Link to="#">Contact</Link>
                                     </li>
                                 </ul>
                             </nav>
                         </div>
 
-                        <div className="col-md-2 col-6">
+                        <div className="col-lg-2 col-6">
                             <div className="header-actions">
-                                <button className="action-btn search">
-                                    <FaSearch />
-                                </button>
-                                <button className="action-btn account">
-                                    <FaUser />
-                                </button>
-                                <button className="action-btn cart">
-                                    <FaShoppingCart />
-                                    <span className="cart-count">3</span>
-                                </button>
+                                <Button onClick={() => navigate(path.login)} btnText="Login" />
                             </div>
                         </div>
                     </div>
@@ -191,7 +184,7 @@ const Header = () => {
                                 {menuItems?.map((item: any, index: number) => (
                                     <li key={index} className={item.submenu ? "has-submenu" : ""}>
                                         <div className="menu-item-header">
-                                            <a href={item.link}>{item.title}</a>
+                                            <Link to={item.link}>{item.title}</Link>
                                             {item.submenu && (
                                                 <button
                                                     className={`submenu-toggle ${
@@ -207,7 +200,7 @@ const Header = () => {
                                             <ul className={`mobile-submenu ${activeSubmenu === index ? "active" : ""}`}>
                                                 {item.submenu.map((subItem: any, subIndex: number) => (
                                                     <li key={subIndex}>
-                                                        <a href={subItem.link}>{subItem.title}</a>
+                                                        <Link to={subItem.link}>{subItem.title}</Link>
                                                     </li>
                                                 ))}
                                             </ul>
