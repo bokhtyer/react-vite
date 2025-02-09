@@ -18,7 +18,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     offset = 8,
     className = "",
     width = "200",
-    textAlign = "center",
+    textAlign,
 }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [dynamicPosition, setDynamicPosition] = useState(position);
@@ -55,17 +55,17 @@ const Tooltip: React.FC<TooltipProps> = ({
                 case "top":
                     tooltipStyles.left = Math.max(
                         Math.min(
-                            triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2,
+                            triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2 - 8,
                             viewportWidth - tooltipRect.width
                         ),
                         0
                     );
-                    tooltipStyles.top = triggerRect.top - tooltipRect.height - offset;
+                    tooltipStyles.top = triggerRect.top - tooltipRect.height - offset - 8;
                     break;
                 case "bottom":
                     tooltipStyles.left = Math.max(
                         Math.min(
-                            triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2,
+                            triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2 - 8,
                             viewportWidth - tooltipRect.width
                         ),
                         0
@@ -73,8 +73,11 @@ const Tooltip: React.FC<TooltipProps> = ({
                     tooltipStyles.top = triggerRect.bottom + offset;
                     break;
                 case "left":
-                    tooltipStyles.left = Math.max(triggerRect.left - tooltipRect.width - offset, 0);
-                    tooltipStyles.top = Math.max(triggerRect.top + triggerRect.height / 2 - tooltipRect.height / 2, 0);
+                    tooltipStyles.left = Math.max(triggerRect.left - tooltipRect.width - offset - 12, 0);
+                    tooltipStyles.top = Math.max(
+                        triggerRect.top + triggerRect.height / 2 - tooltipRect.height / 2 - 4,
+                        0
+                    );
                     break;
                 case "right":
                     tooltipStyles.left = Math.min(triggerRect.right + offset, viewportWidth - tooltipRect.width);
@@ -117,6 +120,13 @@ const Tooltip: React.FC<TooltipProps> = ({
         };
     }, [isVisible]);
 
+    const getTextAlign = () => {
+        if (textAlign) return textAlign;
+        if (dynamicPosition === "left") return "right";
+        if (dynamicPosition === "right") return "left";
+        return "center";
+    };
+
     return (
         <div
             className="tooltip-container"
@@ -125,24 +135,31 @@ const Tooltip: React.FC<TooltipProps> = ({
             onMouseLeave={() => setIsVisible(false)}
             style={{ display: "inline-block", position: "relative" }}
         >
-            {children}
+            <div className="tpt-btn">
+                {children}
+                <div
+                    style={{
+                        visibility: isVisible ? "visible" : "hidden",
+                    }}
+                    className={`tooltip-arrow ${isVisible ? "active" : ""} tooltip-arrow-${dynamicPosition}`}
+                />
+            </div>
+
             {isVisible && (
                 <div
                     ref={tooltipRef}
-                    className={`tooltip-box ${className}`}
+                    className={`tooltip-box ${className} ${position}`}
                     style={{
                         position: "fixed",
                         zIndex: 9999,
                         visibility: isVisible ? "visible" : "hidden",
                         opacity: isVisible ? 1 : 0,
-                        transition: "opacity 0.3s ease",
-                        width: "width",
+                        width: "100%",
                         maxWidth: dynamicMaxWidth,
-                        textAlign: textAlign,
+                        textAlign: getTextAlign(),
                         ...styles,
                     }}
                 >
-                    <div className={`tooltip-arrow tooltip-arrow-${dynamicPosition}`} />
                     {content}
                 </div>
             )}

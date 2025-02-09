@@ -6,6 +6,7 @@ import { RiDeleteBin3Line, RiEdit2Fill } from "react-icons/ri";
 import Tooltip from "../../../components/common/Tooltip/Tooltip";
 import Breadcrumb from "../../../components/common/Breadcrumb/Breadcrumb";
 import DoubleConfirmationModal from "../../../components/common/DoubleConfirmationModal/DoubleConfirmationModal";
+import Tooltip2 from "../../../components/common/Tooltip/Tooltip2";
 
 const AdminList = () => {
     const { t } = useTranslation();
@@ -77,12 +78,20 @@ const AdminList = () => {
         console.log("Edit", id);
         return (
             <div className="action-buttons">
-                <Tooltip content="Edit User">
+                <Tooltip content="Top tooltip with smooth animation Top tooltip with smooth animation Top tooltip with smooth animation">
                     <button className="btn btn-primary">
                         <RiEdit2Fill />
                     </button>
                 </Tooltip>
-                <Tooltip content="Remove User">
+                {/* <Tooltip2 content="Top tooltip with smooth animation" position="top">
+                    <button onClick={() => setModalOpen(true)} className="btn btn-danger">
+                        <RiDeleteBin3Line />
+                    </button>
+                </Tooltip2> */}
+                <Tooltip
+                    position="bottom"
+                    content="Top tooltip with smooth animation Top tooltip with smooth animation Top tooltip with smooth animation"
+                >
                     <button onClick={() => setModalOpen(true)} className="btn btn-danger">
                         <RiDeleteBin3Line />
                     </button>
