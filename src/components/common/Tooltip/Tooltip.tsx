@@ -55,17 +55,18 @@ const Tooltip: React.FC<TooltipProps> = ({
                 case "top":
                     tooltipStyles.left = Math.max(
                         Math.min(
-                            triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2 - 8,
+                            triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2 - 4,
                             viewportWidth - tooltipRect.width
                         ),
                         0
                     );
-                    tooltipStyles.top = triggerRect.top - tooltipRect.height - offset - 8;
+                    tooltipStyles.top = triggerRect.top - tooltipRect.height - offset - 3;
                     break;
+
                 case "bottom":
                     tooltipStyles.left = Math.max(
                         Math.min(
-                            triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2 - 8,
+                            triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2 - 0,
                             viewportWidth - tooltipRect.width
                         ),
                         0
@@ -154,7 +155,7 @@ const Tooltip: React.FC<TooltipProps> = ({
                         zIndex: 9999,
                         visibility: isVisible ? "visible" : "hidden",
                         opacity: isVisible ? 1 : 0,
-                        width: "100%",
+                        // width: "100%",
                         maxWidth: dynamicMaxWidth,
                         textAlign: getTextAlign(),
                         ...styles,
