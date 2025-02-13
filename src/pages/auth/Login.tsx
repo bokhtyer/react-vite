@@ -39,11 +39,12 @@ const Login: React.FC = () => {
             username: "bokhtyerabid",
             email: "example@gmail.com",
             role: siteConfig.role.admin,
+            permissions: [],
         };
         dispatch(setCredentials({ user: loguserData, token: "faketoken" }));
 
         localStorage.setItem("token", "fake-token");
-        localStorage.setItem("role", "admin"); // Replace with actual role
+        localStorage.setItem("role", loguserData.role); // Replace with actual role
         localStorage.setItem(siteConfig.userData, JSON.stringify(loguserData));
         window.location.href = path.dashboard;
 

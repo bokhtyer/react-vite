@@ -1,5 +1,5 @@
 import type React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import LoginRoute from "./LoginRoute";
@@ -7,16 +7,18 @@ import LoginRoute from "./LoginRoute";
 import { login_routes, admin_routes, user_routes, public_routes } from "./Routes";
 import NotFoundPage from "../pages/errorpage/NotFoundPage";
 import siteConfig from "../config/site-config";
+import { useAuth } from "../utils/useAuth";
+import path from "./path";
 
 type RouteProps = {
     path: string;
     element: JSX.Element;
     layout?: JSX.Element;
+    permission?: string;
 };
 
 const MainRoutes: React.FC = () => {
-    const allowsRoles = "p";
-
+    const { user } = useAuth();
     return (
         <Routes>
             {/* Public Routes (Unauthenticated) */}
@@ -30,10 +32,14 @@ const MainRoutes: React.FC = () => {
             </Route>
 
             {/* Private Routes (Authenticated) */}
-            <Route element={<PrivateRoute allowedRoles={[siteConfig.role.admin, ...allowsRoles]} />}>
+            <Route element={<PrivateRoute allowedRoles={[siteConfig.role.admin]} />}>
                 {admin_routes.map((route: RouteProps, index: number) => (
                     <Route key={index} element={route.layout}>
-                        <Route key={index} {...route} />
+                        {!route?.permission || user?.permissions?.includes(route.permission) ? (
+                            <Route key={index} {...route} />
+                        ) : (
+                            <Route key={index} element={<Navigate to={path.unauthorized} replace />} />
+                        )}
                     </Route>
                 ))}
             </Route>

@@ -14,6 +14,7 @@ type RouteProps = {
     path: string;
     element: JSX.Element;
     layout?: JSX.Element;
+    permission?: string;
 };
 
 // Login routes
@@ -41,6 +42,7 @@ export const admin_routes: RouteProps[] = [
         path: path.admin.admin_list,
         element: <AdminList />,
         layout: <AdminLayout />,
+        permission: "adminlist:read",
     },
 ];
 
