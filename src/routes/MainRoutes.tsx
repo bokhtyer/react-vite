@@ -6,6 +6,7 @@ import LoginRoute from "./LoginRoute";
 
 import { login_routes, admin_routes, user_routes, public_routes } from "./Routes";
 import NotFoundPage from "../pages/errorpage/NotFoundPage";
+import siteConfig from "../config/site-config";
 
 type RouteProps = {
     path: string;
@@ -27,7 +28,7 @@ const MainRoutes: React.FC = () => {
             </Route>
 
             {/* Private Routes (Authenticated) */}
-            <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
+            <Route element={<PrivateRoute allowedRoles={[siteConfig.role.admin]} />}>
                 {/* Private routes */}
                 {admin_routes.map((route: RouteProps, index: number) => (
                     <Route key={index} element={route.layout}>
@@ -37,7 +38,7 @@ const MainRoutes: React.FC = () => {
             </Route>
 
             {/* User-only Route */}
-            <Route element={<PrivateRoute allowedRoles={["user"]} />}>
+            <Route element={<PrivateRoute allowedRoles={[siteConfig.role.user]} />}>
                 {/* User routes */}
                 {user_routes.map((route: RouteProps, index: number) => (
                     <Route key={index} element={route.layout}>
