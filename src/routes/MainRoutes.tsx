@@ -15,6 +15,8 @@ type RouteProps = {
 };
 
 const MainRoutes: React.FC = () => {
+    const allowsRoles = "p";
+
     return (
         <Routes>
             {/* Public Routes (Unauthenticated) */}
@@ -28,8 +30,7 @@ const MainRoutes: React.FC = () => {
             </Route>
 
             {/* Private Routes (Authenticated) */}
-            <Route element={<PrivateRoute allowedRoles={[siteConfig.role.admin]} />}>
-                {/* Private routes */}
+            <Route element={<PrivateRoute allowedRoles={[siteConfig.role.admin, ...allowsRoles]} />}>
                 {admin_routes.map((route: RouteProps, index: number) => (
                     <Route key={index} element={route.layout}>
                         <Route key={index} {...route} />
@@ -39,14 +40,12 @@ const MainRoutes: React.FC = () => {
 
             {/* User-only Route */}
             <Route element={<PrivateRoute allowedRoles={[siteConfig.role.user]} />}>
-                {/* User routes */}
                 {user_routes.map((route: RouteProps, index: number) => (
                     <Route key={index} element={route.layout}>
                         <Route key={index} {...route} />
                     </Route>
                 ))}
             </Route>
-
             {/* Public route like home page about page contact page  */}
             <Route element={<PublicRoute />}>
                 {/* Public routes */}
@@ -56,7 +55,7 @@ const MainRoutes: React.FC = () => {
                     </Route>
                 ))}
             </Route>
-
+            {/* <Route path={path.unauthorized} element={<Unauthorized />} /> */}
             {/* Fallback Route */}
             <Route path="*" element={<NotFoundPage />} />
         </Routes>

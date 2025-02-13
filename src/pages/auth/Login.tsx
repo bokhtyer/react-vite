@@ -8,9 +8,13 @@ import Button from "../../components/common/button/Button";
 import siteConfig from "../../config/site-config";
 import path from "../../routes/path";
 import { LoginFormType } from "../../helper/type";
+import { setCredentials } from "../../store/authSlice";
+import { useAppDispatch } from "../../store";
 
 const Login: React.FC = () => {
     const { mutate: login, isLoading } = useLogin();
+
+    const dispatch = useAppDispatch();
 
     const validateLoginForm = (values: LoginFormType) => {
         const errors: Partial<LoginFormType> = {};
@@ -30,9 +34,17 @@ const Login: React.FC = () => {
             email: values.email.trim(),
             password: values.password,
         };
+        const loguserData = {
+            id: "1",
+            username: "bokhtyerabid",
+            email: "example@gmail.com",
+            role: siteConfig.role.admin,
+        };
+        dispatch(setCredentials({ user: loguserData, token: "faketoken" }));
 
         localStorage.setItem("token", "fake-token");
-        localStorage.setItem("role", siteConfig.role.admin); // Replace with actual role
+        localStorage.setItem("role", "admin"); // Replace with actual role
+        localStorage.setItem(siteConfig.userData, JSON.stringify(loguserData));
         window.location.href = path.dashboard;
 
         // Trigger the mutation for client login

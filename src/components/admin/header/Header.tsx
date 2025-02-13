@@ -5,6 +5,8 @@ import "./Header.scss";
 import { Link } from "react-router-dom";
 import path from "../../../routes/path";
 import siteConfig from "../../../config/site-config";
+import { logout } from "../../../store/authSlice";
+import { useDispatch } from "react-redux";
 
 interface HeaderProps {
     onToggleSidebar: () => void;
@@ -12,9 +14,17 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const dispatch = useDispatch();
 
     const toggleProfile = () => {
         setIsProfileOpen(!isProfileOpen);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem(siteConfig.userData);
+        localStorage.removeItem("role");
+        localStorage.removeItem("token");
+        dispatch(logout());
     };
 
     return (
@@ -60,7 +70,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
                                         </Link>
                                         <div className="dropdown-divider"></div>
                                         <Link
-                                            onClick={() => localStorage.clear()}
+                                            onClick={() => handleLogout()}
                                             to={path.login}
                                             className="dropdown-item text-danger"
                                         >

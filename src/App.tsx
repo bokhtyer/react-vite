@@ -5,6 +5,9 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/react-toastify/dist/ReactToastify.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./i18n";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./store";
 
 import MainRoutes from "./routes/MainRoutes";
 import { QueryClientProvider, QueryClient } from "react-query";
@@ -12,12 +15,17 @@ const queryClient = new QueryClient();
 const App: React.FC = () => {
     return (
         <>
-            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
-            <QueryClientProvider client={queryClient}>
-                <BrowserRouter>
-                    <MainRoutes />
-                </BrowserRouter>
-            </QueryClientProvider>
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+
+                    <QueryClientProvider client={queryClient}>
+                        <BrowserRouter>
+                            <MainRoutes />
+                        </BrowserRouter>
+                    </QueryClientProvider>
+                </PersistGate>
+            </Provider>
         </>
     );
 };

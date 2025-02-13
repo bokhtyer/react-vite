@@ -9,3 +9,20 @@ export type LoginFormType = {
     email: string;
     password: string;
 };
+
+export type User = {
+    id: string;
+    username: string;
+    email: string;
+    role: string;
+};
+export type Permission = {
+    id?: string;
+    name: string;
+    action: string;
+};
+export type Role = {
+    id: string;
+    name: string;
+    permissions: Permission[];
+};
