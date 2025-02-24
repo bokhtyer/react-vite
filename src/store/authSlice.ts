@@ -1,4 +1,4 @@
-// src/store/authSlice.ts
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../helper/type"; // Ensure User type is correctly defined in the imported file
 import type { RootState } from "./index";
