@@ -1,9 +1,7 @@
 import type React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/react-toastify/dist/ReactToastify.css";
-import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./i18n";
 
 import MainRoutes from "./routes/MainRoutes";
