@@ -11,8 +11,12 @@ const Home = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <h1>Home</h1>
-                        <h3>{t("welcome")}</h3>
-                        <p>
+                        <h3 className="text-2xl text-blue-500">{t("welcome")}</h3>
+                        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">React + Vite + Tailwind</h1>
+                        <p className="text-xl text-gray-600 mb-8">
+                            A modern development stack for building fast, beautiful web applications
+                        </p>
+                        <p className="text-2xl text-red-200">
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo praesentium itaque, culpa
                             veritatis eos architecto autem doloremque esse aspernatur, cum vitae hic. Iusto magni
                             inventore earum, animi doloribus dignissimos quo quia? Neque, perferendis? Architecto
