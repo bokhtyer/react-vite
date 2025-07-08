@@ -31,6 +31,11 @@ const Home = () => {
                 </div>
             </div>
             <div className="text-3xl text-red-600 font-bold">Tailwind should be working!</div>
+            <button className="text-white px-4 sm:px-8 py-2 sm:py-3 bg-sky-700 hover:bg-sky-800">Submit</button>
+
+            <button className="bg-sky-700 rounded-md px-4 py-2 text-white hover:bg-sky-800 sm:px-8 sm:py-3">
+                Submit
+            </button>
         </div>
     );
 };
