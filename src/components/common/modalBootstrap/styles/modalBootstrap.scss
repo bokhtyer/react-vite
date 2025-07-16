@@ -1,0 +1,96 @@
+.meeting-alert-body {
+    text-align: center;
+    padding: 20px;
+    color: sienna;
+}
+
+.modal-content {
+    .w-100.modal-title.h4 {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 24px;
+        color: var(--headding-color);
+        text-transform: capitalize;
+        word-break: break-all;
+    }
+}
+
+.modal-header {
+    .btn-close {
+        display: none;
+    }
+}
+
+.upload-videos-modal {
+    top: 40px;
+    position: relative;
+
+    &.modal-lg {
+        max-width: 850px;
+        box-sizing: border-box;
+        padding: 0px 15px;
+    }
+}
+
+.not-title-header-modal {
+    position: relative;
+
+    &.modal-lg {
+        max-width: 850px;
+        box-sizing: border-box;
+        padding: 0px 20px;
+    }
+
+    .modal-content {
+        margin-top: 35px;
+    }
+
+    .modal-header {
+        padding: 0;
+        height: 0;
+        border: none;
+
+        .modal-close-b {
+            cursor: pointer;
+            z-index: 9;
+            line-height: 1;
+            font-size: 27px;
+            color: #fff;
+            position: absolute;
+            top: -12px;
+            right: -12px;
+        }
+    }
+}
+
+.modal-close-b {
+    cursor: pointer;
+}
+.modal-body {
+    padding: 25px 25px;
+}
+span.back-page-arrow {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    i {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .upload-videos-modal {
+        &.modal-lg {
+            padding: 0px;
+        }
+    }
+    .modal-content .w-100.modal-title.h4 {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .modal-body {
+        padding: 20px 18px;
+    }
+}

@@ -38,20 +38,14 @@ const MainRoutes: React.FC = () => {
             </Route>
 
             {/* User-only Route */}
-            <Route element={<PrivateRoute routeCheck={true} />}>
+            <Route element={<PrivateRoute allowedRoles={[siteConfig.role.user]} />}>
+                {/* User routes */}
                 {user_routes.map((route: RouteProps, index: number) => (
                     <Route key={index} element={route.layout}>
                         <Route key={index} {...route} />
                     </Route>
                 ))}
             </Route>
-            {/* <Route element={<PrivateRoute allowedRoles={[siteConfig.role.user]} />}>
-                {user_routes.map((route: RouteProps, index: number) => (
-                    <Route key={index} element={route.layout}>
-                        <Route key={index} {...route} />
-                    </Route>
-                ))}
-            </Route> */}
 
             {/* <Route element={<PrivateRoute routeCheck={true} />}>
                 {agency_private_routes.map((route: RouteProps, index: number) => (
