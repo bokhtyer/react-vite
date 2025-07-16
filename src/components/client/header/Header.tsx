@@ -1,8 +1,10 @@
 // Header.jsx
 import { useState } from "react";
-import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import { FaMapMarkerAlt, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 import "./Header.scss";
 import { Link, useNavigate } from "react-router-dom";
+import LanguageSwitcher from "../../common/LanguageSwitcher/LanguageSwitcher";
 import path from "../../../routes/path";
 import siteConfig from "../../../config/site-config";
 import Button from "../../common/button/Button";
@@ -60,6 +62,29 @@ const Header = () => {
     ];
     return (
         <>
+            <div className="top-bar">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="top-bar-left">
+                                <Link to="#" className="location-link">
+                                    <FaMapMarkerAlt /> Dhaka - 1000, Bangladesh
+                                </Link>
+                                <span className="divider">|</span>
+                                <a href="mailto:support@example.com" className="email-link">
+                                    <MdEmail /> support@example.com
+                                </a>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="top-bar-right">
+                                <LanguageSwitcher />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <header className="main-header">
                 <div className="container">
                     <div className="row align-items-center">
