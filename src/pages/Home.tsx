@@ -26,6 +26,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            <div className="text-3xl text-red-600 font-bold">Tailwind should be working!</div>
         </div>
     );
 };
