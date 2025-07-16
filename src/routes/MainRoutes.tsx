@@ -47,6 +47,14 @@ const MainRoutes: React.FC = () => {
                 ))}
             </Route>
 
+            {/* <Route element={<PrivateRoute routeCheck={true} />}>
+                {agency_private_routes.map((route: RouteProps, index: number) => (
+                    <Route key={index} element={route.layout}>
+                        <Route key={index} {...route} />
+                    </Route>
+                ))}
+            </Route> */}
+
             {/* Public route like home page about page contact page  */}
             <Route element={<PublicRoute />}>
                 {/* Public routes */}
